@@ -1,0 +1,153 @@
+2025-06-25 13:24:16,864 [INFO] Starting Agent Client...
+2025-06-25 13:31:23,590 [INFO] Starting Agent Client...
+2025-06-25 13:31:23,590 [INFO] Agent ID: Rajasekhars-Mac-mini.local-6e3854
+2025-06-25 13:31:23,590 [INFO] Registering agent...
+2025-06-25 13:31:23,596 [INFO] Registered successfully: {'status': 'registered', 'agent_id': 'Rajasekhars-Mac-mini.local-6e3854'}
+2025-06-25 13:39:39,449 [INFO] Command received: get_info
+2025-06-25 13:39:39,472 [INFO] Command result sent to server
+2025-06-25 13:41:19,614 [INFO] Command received: get_services
+2025-06-25 13:41:19,617 [INFO] Command result sent to server
+2025-06-25 13:44:44,944 [INFO] Command received: get_services
+2025-06-25 13:44:44,946 [INFO] Command result sent to server
+2025-06-25 13:45:18,616 [INFO] Starting Agent Client...
+2025-06-25 13:45:18,616 [INFO] Agent ID: Rajasekhars-Mac-mini.local-d166c6
+2025-06-25 13:45:18,616 [INFO] Registering agent...
+2025-06-25 13:45:18,622 [INFO] Registered successfully: {'status': 'registered', 'agent_id': 'Rajasekhars-Mac-mini.local-d166c6'}
+2025-06-25 13:48:21,456 [INFO] Starting Agent Client...
+2025-06-25 13:48:21,456 [INFO] Agent ID: Rajasekhars-Mac-mini.local-c5a8f3
+2025-06-25 13:48:21,456 [INFO] Registering agent...
+2025-06-25 13:48:21,461 [INFO] Registered successfully: {'status': 'registered', 'agent_id': 'Rajasekhars-Mac-mini.local-c5a8f3'}
+2025-06-25 13:49:31,577 [INFO] Command received: get_services
+2025-06-25 13:49:31,602 [INFO] Command result sent to server
+2025-06-25 13:49:36,606 [INFO] Command received: get_services
+2025-06-25 13:49:36,619 [INFO] Command result sent to server
+2025-06-25 15:18:00,111 [INFO] Starting Agent Client...
+2025-06-25 15:18:00,111 [INFO] 🛡️ Agent ID: Rajasekhars-Mac-mini.local-36379b
+2025-06-25 15:18:00,111 [INFO] 📡 Registering agent...
+2025-06-25 15:18:00,117 [INFO] ✅ Registered successfully: {'status': 'registered', 'agent_id': 'Rajasekhars-Mac-mini.local-36379b'}
+2025-06-25 15:18:35,178 [INFO] 🟢 Command received: get_live_services
+2025-06-25 15:18:35,196 [INFO] 📤 Command result sent to server
+2025-06-25 15:54:52,252 [ERROR] ⚠️ Error during polling: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+2025-06-25 15:55:02,260 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-36379b (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105c70270>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-06-25 15:55:12,270 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-36379b (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105c705a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-06-25 15:55:26,219 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-36379b (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105c708d0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-06-25 15:55:36,222 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-36379b (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x105c70c00>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-06-25 15:56:18,953 [INFO] Starting Agent Client...
+2025-06-25 15:56:18,953 [INFO] 🛡️ Agent ID: Rajasekhars-Mac-mini.local-a73f55
+2025-06-25 15:56:18,953 [INFO] 📡 Registering agent...
+2025-06-25 15:56:18,959 [INFO] ✅ Registered successfully: {'status': 'registered', 'agent_id': 'Rajasekhars-Mac-mini.local-a73f55'}
+2025-06-25 16:03:53,671 [ERROR] ⚠️ Error during polling: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+2025-06-25 16:04:11,532 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x1072d7ce0>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:04:29,323 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x107540270>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:04:47,107 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x1075405a0>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:05:04,900 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x1075408d0>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:05:22,689 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x107540c00>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:05:40,478 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x107540f30>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:05:58,270 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x107541260>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:06:16,110 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x107541590>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:06:33,968 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x1075418c0>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:06:51,826 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x107541bf0>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:07:09,665 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x107541f20>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:07:27,466 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x1072d7ce0>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:07:45,255 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x107554050>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:08:03,045 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x107554380>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:08:20,831 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x1075546b0>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:08:38,614 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x1075549e0>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:08:56,400 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x107554d10>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:09:14,191 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x107555040>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:09:31,992 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x107555370>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:09:49,786 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x1075556a0>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:10:07,572 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x1075559d0>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:10:25,378 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x107555d00>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:10:43,234 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-a73f55 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x107556030>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 16:11:07,487 [INFO] Starting Agent Client...
+2025-06-25 16:11:07,487 [INFO] 🛡️ Agent ID: Rajasekhars-Mac-mini.local-5b6fca
+2025-06-25 16:11:07,487 [INFO] 📡 Registering agent...
+2025-06-25 16:11:07,493 [INFO] ✅ Registered successfully: {'status': 'registered', 'agent_id': 'Rajasekhars-Mac-mini.local-5b6fca'}
+2025-06-25 16:20:08,337 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-5b6fca (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1022c3df0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-06-25 16:22:18,561 [INFO] 🟢 Command received: get_live_services
+2025-06-25 16:22:19,779 [INFO] 📤 Command result sent to server
+2025-06-25 16:40:01,677 [INFO] 🟢 Command received: get_live_services
+2025-06-25 16:40:02,116 [INFO] 📤 Command result sent to server
+2025-06-25 16:40:47,193 [INFO] 🟢 Command received: get_live_services
+2025-06-25 16:40:47,205 [ERROR] ❌ Failed to send result: 422 Client Error: Unprocessable Content for url: http://127.0.0.1:8000/agents/result
+2025-06-25 16:41:52,308 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-5b6fca (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x1022c3ce0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-06-25 16:42:02,313 [INFO] 🟢 Command received: get_live_services
+2025-06-25 16:42:02,329 [ERROR] ❌ Failed to send result: 422 Client Error: Unprocessable Content for url: http://127.0.0.1:8000/agents/result
+2025-06-25 16:53:48,810 [INFO] Starting Agent Client...
+2025-06-25 16:53:48,810 [INFO] 🛡️ Agent ID: Rajasekhars-Mac-mini.local-edee50
+2025-06-25 16:53:48,810 [INFO] 📡 Registering agent...
+2025-06-25 16:53:48,816 [INFO] ✅ Registered successfully: {'status': 'registered', 'agent_id': 'Rajasekhars-Mac-mini.local-edee50'}
+2025-06-25 16:53:53,823 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-edee50 (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10244dbd0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-06-25 16:54:43,978 [INFO] Starting Agent Client...
+2025-06-25 16:54:43,978 [INFO] 🛡️ Agent ID: Rajasekhars-Mac-mini.local-1ea5fd
+2025-06-25 16:54:43,978 [INFO] 📡 Registering agent...
+2025-06-25 16:54:43,984 [INFO] ✅ Registered successfully: {'status': 'registered', 'agent_id': 'Rajasekhars-Mac-mini.local-1ea5fd'}
+2025-06-25 16:59:59,440 [INFO] 🟢 Command received: scan_security
+2025-06-25 17:00:00,379 [INFO] 📤 Command result sent to server
+2025-06-25 17:17:07,965 [ERROR] ⚠️ Error during polling: ('Connection aborted.', ConnectionResetError(54, 'Connection reset by peer'))
+2025-06-25 17:17:17,976 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-1ea5fd (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x102280050>: Failed to establish a new connection: [Errno 61] Connection refused'))
+2025-06-25 17:17:35,828 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-1ea5fd (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x102280380>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 17:17:53,653 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-1ea5fd (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x1022806b0>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 17:18:11,444 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-1ea5fd (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x1022809e0>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 17:18:29,230 [ERROR] ⚠️ Error during polling: HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: /commands/get/Rajasekhars-Mac-mini.local-1ea5fd (Caused by ConnectTimeoutError(<urllib3.connection.HTTPConnection object at 0x102280d10>, 'Connection to 127.0.0.1 timed out. (connect timeout=None)'))
+2025-06-25 17:18:50,479 [INFO] Starting Agent Client...
+2025-06-25 17:18:50,479 [INFO] 🛡️ Agent ID: Rajasekhars-Mac-mini.local-cb351f
+2025-06-25 17:18:50,479 [INFO] 📡 Registering agent...
+2025-06-25 17:18:53,688 [ERROR] ❌ Registration failed: 500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/agents/register
+2025-06-25 17:23:11,259 [INFO] Starting Agent Client...
+2025-06-25 17:23:11,259 [INFO] 🛡️ Agent ID: Rajasekhars-Mac-mini.local-b94a9c
+2025-06-25 17:23:11,259 [INFO] 📡 Registering agent...
+2025-06-25 17:23:15,897 [ERROR] ❌ Registration failed: 500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/agents/register
+2025-06-25 17:31:20,646 [INFO] Starting Agent Client...
+2025-06-25 17:31:20,646 [INFO] 🛡️ Agent ID: Rajasekhars-Mac-mini.local-588806
+2025-06-25 17:31:20,646 [INFO] 📡 Registering agent...
+2025-06-25 17:31:20,900 [ERROR] ❌ Registration failed: 500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/agents/register
+2025-06-25 17:31:37,012 [INFO] Starting Agent Client...
+2025-06-25 17:31:37,013 [INFO] 🛡️ Agent ID: Rajasekhars-Mac-mini.local-b4cff8
+2025-06-25 17:31:37,013 [INFO] 📡 Registering agent...
+2025-06-25 17:31:42,162 [INFO] ✅ Registered successfully: {'status': 'registered', 'agent_id': 'Rajasekhars-Mac-mini.local-b4cff8'}
+2025-06-25 17:42:30,834 [INFO] Starting Agent Client...
+2025-06-25 17:42:30,834 [INFO] 🛡️ Agent ID: Rajasekhars-Mac-mini.local-db3594
+2025-06-25 17:42:30,834 [INFO] 📡 Registering agent...
+2025-06-25 17:42:31,900 [INFO] ✅ Registered successfully: {'status': 'registered', 'agent_id': 'Rajasekhars-Mac-mini.local-db3594'}
+2025-06-25 17:44:47,136 [INFO] Starting Agent Client...
+2025-06-25 17:44:47,137 [INFO] 🛡️ Agent ID: Rajasekhars-Mac-mini.local-bf7771
+2025-06-25 17:44:47,137 [INFO] 📡 Registering agent...
+2025-06-25 17:44:47,137 [INFO] Agent OS Darwin
+2025-06-25 17:44:48,320 [INFO] ✅ Registered successfully: {'status': 'registered', 'agent_id': 'Rajasekhars-Mac-mini.local-bf7771'}
+2025-06-25 17:48:13,181 [INFO] Starting Agent Client...
+2025-06-25 17:48:13,181 [INFO] 🛡️ Agent ID: Rajasekhars-Mac-mini.local-04056c
+2025-06-25 17:48:13,181 [INFO] 📡 Registering agent...
+2025-06-25 17:48:13,181 [INFO] Agent OS Darwin
+2025-06-25 17:48:13,187 [ERROR] ❌ Registration failed: 500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/agents/register
+2025-06-25 17:48:44,621 [INFO] Starting Agent Client...
+2025-06-25 17:48:44,621 [INFO] 🛡️ Agent ID: Rajasekhars-Mac-mini.local-e198ae
+2025-06-25 17:48:44,621 [INFO] 📡 Registering agent...
+2025-06-25 17:48:44,621 [INFO] Agent OS Darwin
+2025-06-25 17:48:52,937 [INFO] ✅ Registered successfully: {'status': 'registered', 'agent_id': 'Rajasekhars-Mac-mini.local-e198ae'}
+2025-06-25 17:49:26,900 [INFO] Starting Agent Client...
+2025-06-25 17:49:26,900 [INFO] 🛡️ Agent ID: Rajasekhars-Mac-mini.local-bcb056
+2025-06-25 17:49:26,900 [INFO] 📡 Registering agent...
+2025-06-25 17:49:26,900 [INFO] Agent OS Darwin
+2025-06-25 17:49:26,906 [ERROR] ❌ Registration failed: 500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/agents/register
+2025-06-25 17:50:53,824 [INFO] Starting Agent Client...
+2025-06-25 17:50:53,825 [INFO] 🛡️ Agent ID: Rajasekhars-Mac-mini.local-e547b4
+2025-06-25 17:50:53,825 [INFO] 📡 Registering agent...
+2025-06-25 17:50:53,825 [INFO] Agent OS Darwin
+2025-06-25 17:50:53,834 [ERROR] ❌ Registration failed: 500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/agents/register
+2025-06-25 17:51:17,726 [INFO] Starting Agent Client...
+2025-06-25 17:51:17,726 [INFO] 🛡️ Agent ID: Rajasekhars-Mac-mini.local-ab5ccc
+2025-06-25 17:51:17,726 [INFO] 📡 Registering agent...
+2025-06-25 17:51:17,726 [INFO] Agent OS Darwin
+2025-06-25 17:51:17,735 [ERROR] ❌ Registration failed: 500 Server Error: Internal Server Error for url: http://127.0.0.1:8000/agents/register
+2025-06-25 17:52:10,065 [INFO] Starting Agent Client...
+2025-06-25 17:52:10,066 [INFO] 🛡️ Agent ID: Rajasekhars-Mac-mini.local-bbe0a5
+2025-06-25 17:52:10,066 [INFO] 📡 Registering agent...
+2025-06-25 17:52:10,066 [INFO] Agent OS Darwin
+2025-06-25 17:52:15,059 [INFO] ✅ Registered successfully: {'status': 'registered', 'agent_id': 'Rajasekhars-Mac-mini.local-bbe0a5'}
+2025-06-25 17:52:38,823 [INFO] Starting Agent Client...
+2025-06-25 17:52:38,823 [INFO] 🛡️ Agent ID: Rajasekhars-Mac-mini.local-3e17c6
+2025-06-25 17:52:38,823 [INFO] 📡 Registering agent...
+2025-06-25 17:52:38,823 [INFO] Agent OS Darwin
+2025-06-25 17:52:39,824 [INFO] ✅ Registered successfully: {'status': 'registered', 'agent_id': 'Rajasekhars-Mac-mini.local-3e17c6'}

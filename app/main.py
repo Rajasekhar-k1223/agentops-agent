@@ -1,5 +1,7 @@
+# app/main.py
+
 import logging
-from app.client import start_agent
+from app.client import AgentClient
 
 logging.basicConfig(
     level=logging.INFO,
@@ -12,4 +14,5 @@ logging.basicConfig(
 
 if __name__ == "__main__":
     logging.info("Starting Agent Client...")
-    start_agent()
+    client = AgentClient()
+    client.start()

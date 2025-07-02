@@ -1,61 +1,211 @@
+# app/security_scanner.py
+
 import subprocess
 import platform
-import shutil
+import os
 
-def run_command(command: str):
-    try:
-        return subprocess.check_output(command, shell=True, text=True)
-    except subprocess.CalledProcessError as e:
-        return f"Command error: {e.output}"
-    except Exception as e:
-        return str(e)
+class SecurityScanner:
+    def scan(self):
+        findings = []
 
-def run_clamav_scan():
-    if not shutil.which("clamscan"):
-        return "ClamAV not found."
-    return run_command("clamscan -r / --bell -i")
+        system = platform.system().lower()
 
-def run_lynis_audit():
-    if not shutil.which("lynis"):
-        return "Lynis not found."
-    return run_command("lynis audit system --quick")
+        if system == "linux":
+            findings.extend(self._linux_scan())
+        elif system == "windows":
+            findings.extend(self._windows_scan())
+        elif system == "darwin":
+            findings.extend(self._macos_scan())
+        else:
+            findings.append({"type": "info", "details": "Security scanning not implemented for this OS."})
 
-def run_windows_defender_scan():
-    # Windows Defender command line
-    command = r'powershell "Start-MpScan -ScanType QuickScan"'
-    return run_command(command)
+        return findings
 
-def run_windows_security_status():
-    # Show AV status via PowerShell
-    command = r'powershell "Get-MpComputerStatus | Select-Object AMServiceEnabled, AntispywareEnabled, AntivirusEnabled"'
-    return run_command(command)
+    def _linux_scan(self):
+        results = []
 
-def run_macos_security_audit():
-    audit_info = run_command("system_profiler SPFirewallDataType")
-    xprotect_status = run_command("defaults read /System/Library/CoreServices/XProtect.bundle/Contents/Info.plist")
-    return f"{audit_info}\n\nXProtect Info:\n{xprotect_status}"
+        # ClamAV scan
+        if self._command_exists("clamscan"):
+            try:
+                output = subprocess.check_output(
+                    ["clamscan", "-r", "--infected", "/"],
+                    text=True,
+                    stderr=subprocess.DEVNULL,
+                    timeout=300
+                )
+                if "FOUND" in output:
+                    results.append({
+                        "type": "virus",
+                        "details": output
+                    })
+            except subprocess.TimeoutExpired:
+                results.append({
+                    "type": "scanner_error",
+                    "details": "ClamAV scan timed out"
+                })
+            except Exception as e:
+                results.append({
+                    "type": "scanner_error",
+                    "details": str(e)
+                })
+        else:
+            results.append({"type": "info", "details": "ClamAV not installed."})
 
-def scan_viruses_and_vulnerabilities():
-    os_type = platform.system()
-    output = f"Detected OS: {os_type}\n"
+        # chkrootkit
+        if self._command_exists("chkrootkit"):
+            try:
+                output = subprocess.check_output(
+                    ["chkrootkit"],
+                    text=True,
+                    stderr=subprocess.DEVNULL,
+                    timeout=120
+                )
+                if "INFECTED" in output or "WARNING" in output:
+                    results.append({
+                        "type": "rootkit",
+                        "details": output
+                    })
+            except Exception as e:
+                results.append({
+                    "type": "scanner_error",
+                    "details": f"chkrootkit error: {e}"
+                })
+        else:
+            results.append({"type": "info", "details": "chkrootkit not installed."})
 
-    if os_type == "Linux":
-        output += "\n--- ClamAV Scan ---\n"
-        output += run_clamav_scan()
-        output += "\n--- Lynis Audit ---\n"
-        output += run_lynis_audit()
+        # Lynis
+        if self._command_exists("lynis"):
+            try:
+                output = subprocess.check_output(
+                    ["lynis", "audit", "system"],
+                    text=True,
+                    stderr=subprocess.DEVNULL,
+                    timeout=300
+                )
+                results.append({
+                    "type": "audit",
+                    "details": output
+                })
+            except Exception as e:
+                results.append({
+                    "type": "scanner_error",
+                    "details": f"Lynis error: {e}"
+                })
+        else:
+            results.append({"type": "info", "details": "Lynis not installed."})
 
-    elif os_type == "Darwin":  # macOS
-        output += "\n--- macOS Security Audit ---\n"
-        output += run_macos_security_audit()
+        return results
 
-    elif os_type == "Windows":
-        output += "\n--- Windows Defender Scan ---\n"
-        output += run_windows_defender_scan()
-        output += "\n--- Defender Status ---\n"
-        output += run_windows_security_status()
+    def _windows_scan(self):
+        results = []
+        try:
+            # Check Windows Defender status
+            cmd = [
+                "powershell",
+                "-Command",
+                "Get-MpThreatDetection"
+            ]
+            output = subprocess.check_output(
+                cmd,
+                text=True,
+                stderr=subprocess.DEVNULL,
+                timeout=120
+            )
+            if output.strip():
+                results.append({
+                    "type": "virus",
+                    "details": output
+                })
+            else:
+                results.append({
+                    "type": "info",
+                    "details": "Windows Defender found no threats."
+                })
 
-    else:
-        output += "❌ Unsupported OS for security scanning."
+        except subprocess.CalledProcessError as e:
+            results.append({
+                "type": "scanner_error",
+                "details": f"Windows scan failed: {e}"
+            })
+        except FileNotFoundError:
+            results.append({
+                "type": "info",
+                "details": "Windows Defender not available or PowerShell missing."
+            })
 
-    return output
+        return results
+
+    def _macos_scan(self):
+        results = []
+
+        # ClamAV
+        if self._command_exists("clamscan"):
+            try:
+                output = subprocess.check_output(
+                    ["clamscan", "-r", "--infected", "/"],
+                    text=True,
+                    stderr=subprocess.DEVNULL,
+                    timeout=300
+                )
+                if "FOUND" in output:
+                    results.append({
+                        "type": "virus",
+                        "details": output
+                    })
+            except subprocess.TimeoutExpired:
+                results.append({
+                    "type": "scanner_error",
+                    "details": "ClamAV scan timed out"
+                })
+            except Exception as e:
+                results.append({
+                    "type": "scanner_error",
+                    "details": str(e)
+                })
+        else:
+            results.append({"type": "info", "details": "ClamAV not installed."})
+
+        # Check Gatekeeper status
+        try:
+            spctl_status = subprocess.check_output(
+                ["spctl", "--status"],
+                text=True,
+                stderr=subprocess.DEVNULL
+            )
+            results.append({
+                "type": "gatekeeper",
+                "details": spctl_status.strip()
+            })
+        except Exception as e:
+            results.append({
+                "type": "scanner_error",
+                "details": f"Gatekeeper check error: {e}"
+            })
+
+        # Check System Integrity Protection (SIP) status
+        if self._command_exists("csrutil"):
+            try:
+                csrutil_status = subprocess.check_output(
+                    ["csrutil", "status"],
+                    text=True,
+                    stderr=subprocess.DEVNULL
+                )
+                results.append({
+                    "type": "sip",
+                    "details": csrutil_status.strip()
+                })
+            except Exception as e:
+                results.append({
+                    "type": "scanner_error",
+                    "details": f"SIP check error: {e}"
+                })
+
+        return results
+
+    def _command_exists(self, command):
+        """Check if a command exists in PATH."""
+        return subprocess.call(
+            ["which", command],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL
+        ) == 0

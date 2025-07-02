@@ -1,90 +1,223 @@
+# app/system_info.py
+
 import platform
-import os
 import socket
 import psutil
 import subprocess
-import logging
+import os
+import glob
 
 def get_basic_info():
+    """
+    Gather basic machine info:
+    - hostname
+    - OS name + version
+    - architecture
+    - CPU name
+    - memory size
+    """
     return {
         "hostname": socket.gethostname(),
         "os": platform.system(),
         "os_version": platform.version(),
-        "ip_address": socket.gethostbyname(socket.gethostname()),
+        "architecture": platform.machine(),
         "cpu": platform.processor(),
-        "ram_gb": round(psutil.virtual_memory().total / (1024 ** 3), 2)
+        "memory_gb": round(psutil.virtual_memory().total / (1024 ** 3), 2),
+        "cpu_count": psutil.cpu_count(),
+        "cpu_percent": psutil.cpu_percent(interval=1),
+        "memory_total_MB": round(psutil.virtual_memory().total / 1024 / 1024, 2),
+        "memory_used_MB": round(psutil.virtual_memory().used / 1024 / 1024, 2),
+        "disk_usage_percent": psutil.disk_usage('/').percent,
+        "ip_address": socket.gethostbyname(socket.gethostname())
     }
 
 def get_installed_packages():
+    """
+    Attempt to gather installed software depending on OS.
+    - On Linux: dpkg, rpm, or flatpak
+    - On Windows: wmic
+    - On macOS: brew list or system_profiler
+    """
+    system = platform.system().lower()
+    packages = []
+
     try:
-        if platform.system() == "Linux":
-            result = subprocess.check_output("dpkg -l", shell=True, text=True)
-        elif platform.system() == "Windows":
-            result = subprocess.check_output("powershell -Command \"Get-WmiObject -Class Win32_Product | Select-Object Name\"", shell=True, text=True)
-        else:
-            result = subprocess.check_output("pip list", shell=True, text=True)
-        return result
+        if system == "linux":
+            if os.path.exists("/usr/bin/dpkg"):
+                output = subprocess.check_output(["dpkg", "-l"], text=True, stderr=subprocess.DEVNULL)
+                packages = parse_dpkg_output(output)
+            elif os.path.exists("/usr/bin/rpm"):
+                output = subprocess.check_output(["rpm", "-qa"], text=True, stderr=subprocess.DEVNULL)
+                packages = output.splitlines()
+        elif system == "windows":
+            output = subprocess.check_output(
+                ["wmic", "product", "get", "name,version"],
+                text=True,
+                stderr=subprocess.DEVNULL,
+            )
+            packages = parse_windows_wmic_output(output)
+        elif system == "darwin":
+            # macOS
+            if os.path.exists("/opt/homebrew/bin/brew"):
+                output = subprocess.check_output(
+                    ["/opt/homebrew/bin/brew", "list"],
+                    text=True,
+                    stderr=subprocess.DEVNULL,
+                )
+                packages = output.splitlines()
+            else:
+                output = subprocess.check_output(
+                    ["system_profiler", "SPApplicationsDataType"],
+                    text=True,
+                    stderr=subprocess.DEVNULL,
+                )
+                packages = parse_macos_system_profiler(output)
+
     except Exception as e:
-        logging.error(f"Failed to get installed packages: {e}")
-        return str(e)
+        packages = [f"error retrieving packages: {str(e)}"]
+
+    return packages
+
+def parse_dpkg_output(output):
+    """
+    Parse output of dpkg -l
+    """
+    pkgs = []
+    for line in output.splitlines():
+        if line.startswith("ii "):
+            tokens = line.split()
+            if len(tokens) >= 3:
+                pkgs.append(f"{tokens[1]} {tokens[2]}")
+    return pkgs
+
+def parse_windows_wmic_output(output):
+    """
+    Parse wmic product list output
+    """
+    pkgs = []
+    lines = output.strip().splitlines()
+    for line in lines[1:]:
+        line = line.strip()
+        if line:
+            pkgs.append(line)
+    return pkgs
+
+def parse_macos_system_profiler(output):
+    """
+    Parse system_profiler output to list installed apps.
+    """
+    pkgs = []
+    current_app = ""
+    for line in output.splitlines():
+        if line.startswith("        "):
+            current_app += line.strip() + " "
+        else:
+            if current_app:
+                pkgs.append(current_app.strip())
+            current_app = line.strip()
+    if current_app:
+        pkgs.append(current_app.strip())
+    return pkgs
 
 def get_running_services():
-    try:
-        os_type = platform.system()
-
-        if os_type == "Linux":
-            result = subprocess.check_output(
-                "systemctl list-units --type=service --state=running",
-                shell=True, text=True
-            )
-
-        elif os_type == "Windows":
-            result = subprocess.check_output(
-                "sc query type= service state= all",
-                shell=True, text=True
-            )
-
-        elif os_type == "Darwin":  # macOS
-            result = subprocess.check_output(
-                "launchctl list",
-                shell=True, text=True
-            )
-
-        else:
-            result = f"Service listing not supported on OS: {os_type}"
-
-        return result
-
-    except subprocess.CalledProcessError as e:
-        logging.error(f"Command failed with return code {e.returncode}: {e.output}")
-        return f"Command error: {e.output}"
-
-    except Exception as e:
-        logging.error(f"Failed to get running services: {e}")
-        return str(e)
-
-
-def get_log_contents(log_path="agent.log", max_lines=100):
-    try:
-        with open(log_path, "r") as file:
-            lines = file.readlines()[-max_lines:]
-        return "".join(lines)
-    except Exception as e:
-        logging.error(f"Failed to read log file: {e}")
-        return str(e)
-def get_live_background_services():
+    """
+    List running processes.
+    """
     services = []
-
     try:
-        if platform.system() == "Windows":
-            for proc in psutil.process_iter(['pid', 'name', 'status']):
-                if proc.info['status'] == psutil.STATUS_RUNNING:
-                    services.append(proc.info)
-        else:
-            # For Linux/macOS
-            for proc in psutil.process_iter(['pid', 'name']):
-                services.append(proc.info)
-
-        return services
+        for proc in psutil.process_iter(attrs=['pid', 'name']):
+            services.append({
+                "pid": proc.info['pid'],
+                "name": proc.info['name'],
+            })
     except Exception as e:
-        return f"Error retrieving services: {e}"
+        services.append({"error": str(e)})
+    return services
+
+def get_live_background_services():
+    """
+    List live background processes.
+    """
+    try:
+        return [p.info for p in psutil.process_iter(attrs=['pid', 'name']) if p.info['pid'] != 0]
+    except Exception as e:
+        return str(e)
+
+def get_log_contents():
+    """
+    Read logs for Linux, Windows, macOS
+    """
+    system = platform.system().lower()
+    logs = ""
+
+    if system == "linux":
+        logs = collect_linux_logs()
+    elif system == "windows":
+        logs = collect_windows_logs()
+    elif system == "darwin":
+        logs = collect_macos_logs()
+
+    return logs
+
+def collect_linux_logs():
+    log_files = [
+        "/var/log/syslog",
+        "/var/log/messages",
+        "/var/log/auth.log",
+        "/var/log/secure",
+        "/var/log/kern.log",
+        "/var/log/cron",
+        "/var/log/fail2ban.log",
+        "/var/log/ufw.log",
+        "/var/log/apache2/*.log",
+        "/var/log/nginx/*.log",
+        "/var/log/mysql/*.log",
+        "/var/log/mariadb/*.log",
+        "/var/log/mongodb/*.log",
+        "/var/log/php7.4-fpm.log",
+        "/var/log/mail.log",
+        "/var/log/postgresql/*.log",
+        "/var/log/docker.log",
+        "/var/log/samba/*.log",
+        "/var/log/squid/*.log",
+        "/var/log/pacemaker.log",
+        "/var/log/libvirt/*.log",
+        "/var/log/haproxy.log",
+    ]
+    logs = []
+    for path in log_files:
+        for f in glob.glob(path):
+            try:
+                with open(f, "r", errors="ignore") as file:
+                    lines = file.readlines()[-1000:]  # only last 1000 lines
+                    logs.append(f"==> {f} <==\n" + "".join(lines))
+            except Exception as e:
+                logs.append(f"Error reading {f}: {str(e)}")
+
+    return "\n".join(logs)
+
+def collect_windows_logs():
+    logs = []
+    try:
+        output = subprocess.check_output(
+            ["wevtutil", "qe", "System", "/c:50", "/f:text"],
+            text=True,
+            stderr=subprocess.DEVNULL
+        )
+        logs.append(output)
+    except Exception as e:
+        logs.append(f"Error reading Windows logs: {str(e)}")
+    return "\n".join(logs)
+
+def collect_macos_logs():
+    logs = []
+    try:
+        output = subprocess.check_output(
+            ["log", "show", "--predicate", "eventType == logEvent", "--last", "1h"],
+            text=True,
+            stderr=subprocess.DEVNULL,
+        )
+        logs.append(output)
+    except Exception as e:
+        logs.append(f"Error reading macOS logs: {str(e)}")
+    return "\n".join(logs)

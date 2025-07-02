@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['app/main.py'],
+    ['run_agent.sh'],
     pathex=[],
     binaries=[],
     datas=[],
@@ -22,7 +22,7 @@ exe = EXE(
     a.binaries,
     a.datas,
     [],
-    name='agentops-agent',
+    name='agentops',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

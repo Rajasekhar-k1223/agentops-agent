@@ -1,20 +1,38 @@
-# app/db_queue.py
-
+import os
+import platform
 import sqlite3
 import json
 import logging
 import threading
 from contextlib import contextmanager
 
-DB_PATH = "offline_queue.db"
+
+def get_default_db_path():
+    system = platform.system().lower()
+
+    if system == "windows":
+        base_dir = os.environ.get("LOCALAPPDATA", os.getcwd())
+        db_dir = os.path.join(base_dir, "AgentOps")
+    elif system == "darwin":
+        base_dir = os.path.expanduser("~/Library/Application Support")
+        db_dir = os.path.join(base_dir, "AgentOps")
+    elif system == "linux":
+        base_dir = os.path.expanduser("~/.local/share")
+        db_dir = os.path.join(base_dir, "AgentOps")
+    else:
+        db_dir = os.path.join(os.getcwd(), "data")
+
+    os.makedirs(db_dir, exist_ok=True)
+    return os.path.join(db_dir, "offline_queue.db")
+
 
 class DBQueue:
     """
     Queue that stores payloads in a SQLite database for offline persistence.
     """
 
-    def __init__(self, db_path=DB_PATH):
-        self.db_path = db_path
+    def __init__(self, db_path=None):
+        self.db_path = db_path or get_default_db_path()
         self._lock = threading.Lock()
         self._initialize_db()
 
@@ -48,7 +66,7 @@ class DBQueue:
                     (data["path"], json.dumps(data["payload"]))
                 )
                 conn.commit()
-        logging.info(f"💾 Queued offline payload for {data['path']}.")
+        logging.info(f"Queued offline payload for {data['path']}.")
 
     def flush(self, post_func):
         """
@@ -66,13 +84,14 @@ class DBQueue:
                         payload_data = json.loads(payload_json)
                         post_func({"path": path, "payload": payload_data})
                         self._delete_by_id(conn, payload_id)
-                        logging.info(f"✅ Flushed payload {payload_id} for {path}.")
+                        logging.info(f"Flushed payload {payload_id} for {path}.")
                     except Exception as e:
-                        logging.error(f"⚠️ Failed to flush payload {payload_id}: {e}")
+                        # Remove emoji for Windows console compatibility
+                        logging.error(f"Failed to flush payload {payload_id}: {e}")
                 conn.commit()
 
     def _delete_by_id(self, conn, payload_id):
-        """
+        """512
         Delete a single payload by ID.
         """
         conn.execute("DELETE FROM offline_queue WHERE id = ?", (payload_id,))

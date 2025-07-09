@@ -15,7 +15,7 @@ class LocalQueue:
         full_path = os.path.join(self.path, file_name)
         with open(full_path, "w") as f:
             json.dump(data, f)
-        logging.info(f"⏳ Saved data locally: {file_name}")
+        logging.info(f"Saved data locally: {file_name}")
 
     def flush(self, post_func):
         files = os.listdir(self.path)
@@ -26,6 +26,6 @@ class LocalQueue:
                     payload = json.load(f)
                 post_func(payload)
                 os.remove(file_path)
-                logging.info(f"✅ Flushed saved file: {file}")
+                logging.info(f"Flushed saved file: {file}")
             except Exception as e:
-                logging.error(f"⚠️ Could not flush {file}: {e}")
+                logging.error(f"Could not flush {file}: {e}")
